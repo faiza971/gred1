@@ -1,0 +1,785 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <title>Happy Graduation 🎓</title>
+
+  <style>
+
+    :root{
+      --bg1:#312e2e;
+      --bg2:#5095ca;
+    }
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    html,body{
+      width:100%;
+      height:100%;
+      overflow:hidden;
+      font-family:'Poppins',sans-serif;
+    }
+
+    body{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+    }
+
+    /* SEMUA HALAMAN */
+    .page{
+      width:100%;
+      height:100%;
+      position:absolute;
+      top:0;
+      left:0;
+      display:none;
+      justify-content:center;
+      align-items:center;
+      flex-direction:column;
+      padding:20px;
+      text-align:center;
+    }
+
+    /* HALAMAN PIN */
+    .pin-page{
+      display:flex;
+      background:linear-gradient(135deg,#b5fffc,#ffdee9);
+    }
+
+    .pin-box{
+      background:#fff;
+      padding:30px;
+      border-radius:20px;
+      box-shadow:0 5px 20px rgba(0,0,0,.2);
+      width:90%;
+      max-width:400px;
+    }
+
+    .pin-box h2{
+      margin-bottom:15px;
+      color:#333;
+    }
+
+    input{
+      width:100%;
+      padding:12px;
+      margin-top:15px;
+      border-radius:12px;
+      border:1px solid #ccc;
+      outline:none;
+      text-align:center;
+      font-size:1rem;
+    }
+
+    button{
+      margin-top:15px;
+      padding:12px 25px;
+      border:none;
+      border-radius:12px;
+      background:#6ee2e2;
+      color:#fff;
+      cursor:pointer;
+      font-size:1rem;
+      transition:.3s;
+    }
+
+    button:hover{
+      transform:scale(1.05);
+    }
+
+    .error{
+      color:red;
+      margin-top:10px;
+      display:none;
+    }
+
+    /* HALAMAN AWAL */
+    .start-page{
+      background:linear-gradient(135deg,#ffdee9,#b5fffc);
+    }
+
+    .start-text{
+      font-size:1.5rem;
+      color:#333;
+      font-weight:600;
+      line-height:1.7;
+    }
+
+    /* HALAMAN UCAPAN */
+    .card-page{
+      background:linear-gradient(135deg,var(--bg1),var(--bg2));
+      color:#fff;
+    }
+
+    .card{
+      width:100%;
+      max-width:850px;
+      background:rgba(255,255,255,.08);
+      padding:30px;
+      border-radius:25px;
+      backdrop-filter:blur(5px);
+      box-shadow:0 5px 25px rgba(0,0,0,.3);
+    }
+
+    h1{
+      font-size:clamp(2rem,6vw,4rem);
+      margin-bottom:20px;
+    }
+
+    .sub{
+      font-size:1.1rem;
+      line-height:1.8;
+      margin-top:10px;
+    }
+
+    .emoji{
+      font-size:2rem;
+    }
+
+    .memory-img{
+      width:300px;
+      max-width:90%;
+      border-radius:20px;
+      margin-bottom:20px;
+      box-shadow:0 5px 20px rgba(0,0,0,.4);
+    }
+
+    .btn-group{
+      margin-top:20px;
+      display:flex;
+      justify-content:center;
+      gap:15px;
+      flex-wrap:wrap;
+    }
+
+    /* EMOJI JATUH */
+    @keyframes fall{
+      to{
+        transform:translateY(110vh) rotate(720deg);
+        opacity:0;
+      }
+    }
+
+    /* PETASAN */
+    .firework{
+      position:absolute;
+      width:4px;
+      height:4px;
+      border-radius:50%;
+      pointer-events:none;
+      animation:explode 1.2s ease-out forwards;
+    }
+
+    @keyframes explode{
+      from{
+        transform:scale(0) translate(0,0);
+        opacity:1;
+      }
+      to{
+        transform:scale(1) translate(var(--x),var(--y));
+        opacity:0;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- HALAMAN PIN -->
+  <div class="page pin-page" id="pinPage">
+
+    <div class="pin-box">
+
+      <h2>Masukkan PIN 🎯</h2>
+
+      <p>pin nya hari pertama dimana kamu panggil aku dek</p>
+      <p>ingat ga?</p>
+
+      <input
+        type="password"
+        id="pinInput"
+        placeholder="••••••"
+      >
+
+      <button id="pinBtn">
+        Masuk
+      </button>
+
+      <div class="error" id="errorMsg">
+        PIN salah 😭
+      </div>
+
+      <p style="margin-top:10px">
+        kalo ga inget japri aku ajha 🤍
+      </p>
+
+    </div>
+
+  </div>
+
+  <!-- HALAMAN AWAL -->
+  <div class="page start-page" id="startPage">
+
+    <div class="start-text">
+      Wah ada yang udah lulus nih 🎉 <br><br>
+      Selamat yaaaaa 🤍 <br><br>
+      Aku punya sesuatu nih <br>
+      pencet ini dong 👇
+    </div>
+
+    <button id="startBtn">
+      klik
+    </button>
+
+  </div>
+
+  <!-- HALAMAN UCAPAN -->
+  <div class="page card-page" id="cardPage">
+
+    <div class="card">
+
+      <h1>
+        🎉 Happy Graduation May🎓
+      </h1>
+
+      <p class="sub">
+        Selamat atas kelulusannya 🤍 <br>
+        Semoga sukses di langkah selanjutnya ✨ <br>
+        Dan semoga tercapai semua cita-cita 🤲
+      </p>
+
+      <div style="margin-top:20px">
+
+        <span class="emoji">🎊</span>
+        <span class="emoji">🥳</span>
+        <span class="emoji">✨</span>
+        <span class="emoji">💐</span>
+
+      </div>
+
+      <button id="nextBtn">
+        Next ➜
+      </button>
+
+    </div>
+
+  </div>
+
+  <!-- HALAMAN FLASHBACK -->
+  <div class="page card-page" id="flashPage">
+
+    <div class="card">
+
+      <h1>🤍</h1>
+
+      <p class="sub">
+        Mau flashback kenangan kita ga kak? 🥺
+      </p>
+
+      <button id="yesBtn">
+        Iya Mauu 🤍
+      </button>
+
+    </div>
+
+  </div>
+
+  <!-- HALAMAN MEMORY -->
+  <div class="page card-page" id="memoryPage">
+
+    <div class="card">
+
+      <img
+        id="memoryImage"
+        class="memory-img"
+      >
+
+      <p class="sub" id="memoryText"></p>
+
+      <div class="btn-group">
+
+        <button id="repeatBtn">
+          ⬅ Sebelumnya
+        </button>
+
+        <button id="nextMemoryBtn">
+          Next ➜
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- HALAMAN CLOSING -->
+  <div class="page card-page" id="closingPage">
+
+    <div class="card">
+
+      <h1>🤍</h1>
+
+      <p class="sub">
+        See You Again Kak ✨ <br><br>
+
+        Semoga semua langkahmu selalu
+        dipenuhi hal baik 🤍
+      </p>
+
+      <div style="margin-top:20px">
+
+        <span class="emoji">🎓</span>
+        <span class="emoji">✨</span>
+        <span class="emoji">🤍</span>
+        <span class="emoji">🌸</span>
+
+      </div>
+
+      <button id="restartBtn">
+        Ulang Dari Awal 🔄
+      </button>
+
+    </div>
+
+  </div>
+
+  <script>
+
+    // ELEMENT
+    const pinBtn = document.getElementById("pinBtn");
+    const pinInput = document.getElementById("pinInput");
+    const errorMsg = document.getElementById("errorMsg");
+
+    const pinPage = document.getElementById("pinPage");
+    const startPage = document.getElementById("startPage");
+    const cardPage = document.getElementById("cardPage");
+    const flashPage = document.getElementById("flashPage");
+    const memoryPage = document.getElementById("memoryPage");
+    const closingPage = document.getElementById("closingPage");
+
+    const startBtn = document.getElementById("startBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const yesBtn = document.getElementById("yesBtn");
+
+    const nextMemoryBtn =
+    document.getElementById("nextMemoryBtn");
+
+    const repeatBtn =
+    document.getElementById("repeatBtn");
+
+    const restartBtn =
+    document.getElementById("restartBtn");
+
+    const memoryImage =
+    document.getElementById("memoryImage");
+
+    const memoryText =
+    document.getElementById("memoryText");
+
+    // PIN
+    const correctPIN = "28";
+
+    // MEMORY DATA
+    const memories = [
+
+      {
+        image:"dok/doc1.jpeg",
+        text:`
+        Inget ga kak ini pas kapan? <br><br>
+        Foto ini pas waktu ivent pertama aku setelah join rohis.
+        Ivent pertama dimana aku harus gantiin fahma jadi mc karena dia keluar
+        Posisi ivent ini aku jujur masih takut sama kamu
+        Aku dulu pernah cerita si nk takut ro kamu gegara ng pramuka keliatan galak
+        Tapi ternyata setelah lama kenal yabegitulah🤗
+        `
+      },
+
+      {
+        image:"dok/doc2.jpeg",
+        text:`
+        Foto kedua ini waktu ivent ke 3 aku 🤍
+        pas posisi kamu hampir purna
+        Harusnya ada ivent Ramadhan itu si pas aku sama kamu jadi sekretaris tapi aku gaada dokumentasi jadi skip ajha yhaa
+        Disitu sedikit angkatan kamu yang help
+        Aku di situ mulai anggap kamu kaya kakak aku sendiri mulai lbh deket sama kamu
+        Udah gatakut kaya pas dulu awal kenal
+        `
+      },
+
+      {
+        image:"dok/doc3.jpeg",
+        text:`Foto ini foto dimana masih ivent ke 3 aku ini posisi h-2 
+              ivent kita nata gedung H sampe malam 
+              Disitu juga yang kelihatan kerja ya itu itu ajha
+              Angkatan kamu ya mung kamu tok
+              Disitu aku sedikit bangga kak sama kamu
+              Sedikit lo ya gausah geer
+              Karena walaupun mau purna kamu tetep mau bantu kita🤗
+              Makasi ya kak😘`
+      },
+
+      {
+        image:"dok/doc4.jpeg",
+        text:`
+        Foto itu pas hari H kamu kena gunting karena mau ngelepas properti stand 
+Manja banget minta di perban😅
+Gapapa karena aku pmr sejati jadinya mau aku ngobatin kamu🤗`
+      },
+
+      {
+        image:"dok/doc5.jpeg",
+        text:`
+        Foto ini foto lagi nyender nyender manja katanya jari nya ngilu sakit habis kena gunting 
+        terus di foto sama mb rizka🤣
+        Inget nga hari pas itu juga kamu manja banget katanya jarinya sakit gabisa makan
+        Minta di suapin baso sama aku 🤣🤣`
+      },
+
+      {
+        image:"dok/doc6.jpeg",
+        text:`
+        Foto ini foto bareng anggota rohis 2025-2026 semua anggota dan pembina
+        yawalaupun pembina nya pak adif tok si tapi nda papa`
+      },
+
+      {
+        image:"dok/doc7.jpeg",
+        text:`Ini foto khusus anggota muslimah 😅`
+      },
+
+      {
+        image:"dok/doc8.jpeg",
+        text:`Foto ke delapan ini foto pas kita buat buket sampe malam
+
+Inget nga drama pas buat buket hadiah islamic fair
+Banyak drama ada aslam aku naik aku sakit kita lembur ber 2 kadang ber3 sama nafisa
+Yang bantu sedikit
+
+Disitu aku ngerasa 
+Gimana si anggota yang lain jane ngeroso anggota rak si tapi ora ngerewangi
+
+Tapi ndak apa yang lalu biarlah berlalu🤗`
+      },
+
+      {
+        image:"dok/doc9.jpeg",
+        text:`Foto ini pas aku firts time main ke rumah kamu
+Yang nyasar kelewatan gang
+Hampir bablas sampe ke bawah rumah kamu
+Itu kyae main ne sama opi jadine kamu jilbapan
+Nk aku tok mana pernah kamu jilbapan
+Dasteran si 🤣`
+      },
+
+      {
+        image:"dok/doc22.jpeg",
+        text:`Foto ini pas pelantikan sebelum kamu purna
+        sg moto aneh fotone gelap mergo ra diuripi lampune 
+        sengit aku jelek meni black ngono fotone`
+      },
+
+      {
+        image:"dok/doc10.jpeg",
+        text:`Foto ini pas 22 oktober 2025 aku juga lupa ini pas mau apa
+Di inget sendiri ah kak
+Aku lupa itu meh apa`
+      },
+
+      {
+        image:"dok/doc11.jpeg",
+        text:`foto ini pas musyam`
+      },
+
+      {
+        image:"dok/doc12.jpeg",
+        text:`foto ini juga pas musyam setelah serah terima 
+Hahaha disitu posisi nya aku pake atribut dewan kamu uda purna🤗`
+      },
+
+      {
+        image:"dok/doc13.jpeg",
+        text:`Ini pas reor itu
+Seng uangel banget i
+Sg katane meh apalah itu jadine reor e di dapur seafood`
+      },
+
+      {
+        image:"dok/doc14.jpeg",
+        text:`Ini pas apa si 
+Ou itu deng ngasih gatau apa itu ke kakek yg mo purna`
+      },
+
+      {
+        image:"dok/doc15.jpeg",
+        text:`Ini foto dimana si
+Sama pas reor 
+Kayae setelah selesai acara deh`
+      },
+
+      {
+        image:"dok/doc16.jpeg",
+        text:`Si ono ngapain yak tangan nya🫩🫠`
+      },
+
+      {
+        image:"dok/doc17.jpeg",
+        text:`Aduduh kya teletubis ae berpelukan segala💖`
+      },
+
+      {
+        image:"dok/doc18.jpeg",
+        text:`Ini foto pas setelah ivent apa si itu konser kae si ya
+Harlah skema po itu 
+ya itulah pokonya`
+      },
+
+      {
+        image:"dok/doc19.jpeg",
+        text:`Iki sg fotone katane kurang puas njo foto lagi pake bg sg biru😅`
+      },
+
+{
+        image:"dok/doc23.jpeg",
+        text:`Nah ini kaa dimsum buatan kita 💖`
+      },
+
+      {
+        image:"dok/doc20.jpeg",
+        text:`Aduh ini baru kemarin ajha itu fotonya pas main ke rumah kmu`
+      },
+
+      {
+        image:"dok/doc21.jpeg",
+        text:`Hahahaha gaya metal jare may🤣`
+      },
+
+    ];
+
+    let currentMemory = 0;
+
+    // LOGIN
+    pinBtn.addEventListener("click",()=>{
+
+      if(pinInput.value === correctPIN){
+
+        pinPage.style.display = "none";
+        startPage.style.display = "flex";
+
+      }else{
+
+        errorMsg.style.display = "block";
+        pinInput.value = "";
+
+      }
+
+    });
+
+    // BUKA UCAPAN
+    startBtn.addEventListener("click",()=>{
+
+      startPage.style.display = "none";
+      cardPage.style.display = "flex";
+
+      startEmojiRain();
+      launchFireworks();
+
+    });
+
+    // FLASHBACK
+    nextBtn.addEventListener("click",()=>{
+
+      cardPage.style.display = "none";
+      flashPage.style.display = "flex";
+
+    });
+
+    // MEMORY
+    yesBtn.addEventListener("click",()=>{
+
+      flashPage.style.display = "none";
+      memoryPage.style.display = "flex";
+
+      currentMemory = 0;
+
+      showMemory();
+
+    });
+
+    // NEXT MEMORY
+    nextMemoryBtn.addEventListener("click",()=>{
+
+      currentMemory++;
+
+      if(currentMemory < memories.length){
+
+        showMemory();
+
+      }else{
+
+        memoryPage.style.display = "none";
+        closingPage.style.display = "flex";
+
+      }
+
+    });
+
+    // SEBELUMNYA
+    repeatBtn.addEventListener("click",()=>{
+
+      if(currentMemory > 0){
+
+        currentMemory--;
+        showMemory();
+
+      }
+
+    });
+
+    // RESTART
+    restartBtn.addEventListener("click",()=>{
+
+      currentMemory = 0;
+
+      closingPage.style.display = "none";
+      startPage.style.display = "flex";
+
+    });
+
+    // SHOW MEMORY
+    function showMemory(){
+
+      memoryImage.src =
+      memories[currentMemory].image;
+
+      memoryText.innerHTML =
+      memories[currentMemory].text;
+
+      // sembunyikan tombol sebelumnya di halaman pertama
+      if(currentMemory === 0){
+
+        repeatBtn.style.display = "none";
+
+      }else{
+
+        repeatBtn.style.display = "inline-block";
+
+      }
+
+    }
+
+    // EMOJI HUJAN
+    const EMOJIS = [
+      "🎉","🎊","✨","🌟",
+      "🥳","🎈","💐","🤍"
+    ];
+
+    function dropEmoji(){
+
+      const el =
+      document.createElement("div");
+
+      el.innerHTML =
+      EMOJIS[Math.floor(Math.random()*EMOJIS.length)];
+
+      el.style.position = "fixed";
+      el.style.left = Math.random()*100 + "%";
+      el.style.top = "-30px";
+
+      el.style.fontSize =
+      Math.random()*20 + 20 + "px";
+
+      el.style.animation =
+      `fall ${2+Math.random()*3}s linear`;
+
+      document.body.appendChild(el);
+
+      setTimeout(()=>{
+        el.remove();
+      },5000);
+
+    }
+
+    function startEmojiRain(){
+
+      setInterval(dropEmoji,200);
+
+    }
+
+    // PETASAN
+    function launchFireworks(){
+
+      for(let i=0;i<8;i++){
+
+        setTimeout(()=>{
+
+          createFirework(
+            Math.random()*100,
+            Math.random()*60
+          );
+
+        },i*700);
+
+      }
+
+    }
+
+    function createFirework(x,y){
+
+      const colors = [
+        "#ff7675",
+        "#ffe66d",
+        "#74b9ff",
+        "#55efc4",
+        "#fd79a8"
+      ];
+
+      for(let i=0;i<25;i++){
+
+        const dot =
+        document.createElement("div");
+
+        dot.className = "firework";
+
+        dot.style.left = x+"vw";
+        dot.style.top = y+"vh";
+
+        dot.style.background =
+        colors[Math.floor(Math.random()*colors.length)];
+
+        const angle =
+        Math.random()*2*Math.PI;
+
+        const distance =
+        Math.random()*100;
+
+        const dx =
+        Math.cos(angle)*distance+"px";
+
+        const dy =
+        Math.sin(angle)*distance+"px";
+
+        dot.style.setProperty("--x",dx);
+        dot.style.setProperty("--y",dy);
+
+        document.body.appendChild(dot);
+
+        setTimeout(()=>{
+          dot.remove();
+        },1200);
+
+      }
+
+    }
+
+  </script>
+
+</body>
+</html>
